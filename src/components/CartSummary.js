@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart';
-import PaymentRequest from '../components/PaymentRequest';
+import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
+import PaymentRequest from "../components/PaymentRequest";
 
 const CartSummary = () => {
   const [loading, setLoading] = useState(false);
@@ -11,27 +11,27 @@ const CartSummary = () => {
     cartCount,
     clearCart,
     cartDetails,
-    redirectToCheckout,
+    redirectToCheckout
   } = useShoppingCart();
 
-  const handleCheckout = async (event) => {
+  const handleCheckout = async event => {
     event.preventDefault();
     setLoading(true);
 
     const { sessionId } = await fetch(
-      '/.netlify/functions/create-checkout-session',
+      "/.netlify/functions/create-checkout-session",
       {
-        method: 'post',
+        method: "post",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(cartDetails),
+        body: JSON.stringify(cartDetails)
       }
     )
-      .then((res) => {
+      .then(res => {
         return res.json();
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
         setLoading(false);
       });
@@ -45,12 +45,12 @@ const CartSummary = () => {
       {/* This is where we'll render our cart */}
       <p>Number of Items: {cartCount}</p>
       <p>Subtotal: {formattedTotalPrice}</p>
-      <p>Shipping: {formatCurrencyString({ value: 350, currency: 'USD' })}</p>
+      <p>Shipping: {formatCurrencyString({ value: 350, currency: "USD" })}</p>
       <p>
-        Total:{' '}
+        Total:{" "}
         {formatCurrencyString({
           value: totalPrice + 350,
-          currency: 'USD',
+          currency: "USD"
         })}
       </p>
 
