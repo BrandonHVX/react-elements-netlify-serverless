@@ -41,7 +41,7 @@ exports.handler = async event => {
       confirm: true,
       // We are using the metadata to track which items were purchased.
       // We can access this meatadata in our webhook handler to then handle
-      // the fulfillment process.
+
       // In a real application you would track this in an order object in your database.
       metadata: {
         items: JSON.stringify(
